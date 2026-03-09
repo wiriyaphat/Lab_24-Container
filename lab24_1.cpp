@@ -64,3 +64,25 @@ void List::append(int d){
 }
 
 //Write List::remove() here
+void List::remove(int idx){
+	if(root == NULL) return;
+
+    if(idx == 0){
+        Node *temp = root; // temp = 0
+        root = root->next; // 0 -> 1
+        delete temp;
+        size--;
+        return;
+    }
+
+    Node *current = root; // ตัว current = ตัว root (idx 0)
+    // ไป node ก่อนหน้าตัวที่จะลบ
+    for(int i = 0; i < idx-1; i++){
+        current = current->next; // 10 20 30 40 ต้องการลบ 30 -> current 10 กลายเป็น (current 20) 
+    }
+
+    Node *temp = current->next;   // temp = current 30
+    current->next = temp->next;   // current next คือ 20->30 = temp next คือ 30->40 (30 กลายเป็น 40)
+    delete temp;
+    size--;
+}
